@@ -6,10 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Page() {
   return (
-    <Button
-      size="xs"
-      onClick={() => toast}
-    >
+    <Button size="xs" onClick={() => toast}>
       Page
     </Button>
   );
