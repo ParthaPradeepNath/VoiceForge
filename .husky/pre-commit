@@ -1,3 +1,1 @@
-bun run format:check
-bun run format
 bun run lint-staged
