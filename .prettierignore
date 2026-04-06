@@ -1,0 +1,41 @@
+# dependencies
+node_modules
+
+# next.js build output
+.next
+out
+
+# production builds
+build
+dist
+
+# logs
+*.log
+
+# environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# coverage
+coverage
+
+# misc
+.DS_Store
+*.pem
+
+# generated files
+*.tsbuildinfo
+
+# vercel
+.vercel
+
+# IDE/editor
+.vscode
+.idea
