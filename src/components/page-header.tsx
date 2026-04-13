@@ -28,15 +28,23 @@ export function PageHeader({
         <SidebarTrigger />
         <h1 className="text-lg font-semibold tracking-tight">{title}</h1>
       </div>
+
       <div className="flex items-center gap-3">
         <Button variant="outline" size="sm" asChild>
-          <Link href="mailto:partha@nath.com">
+          <Link
+            href="mailto:partha@nath.com"
+            className="flex items-center gap-2"
+          >
             <LikeIcon />
             <span className="hidden lg:block">Feedback</span>
           </Link>
         </Button>
+
         <Button variant="outline" size="sm" asChild>
-          <Link href="mailto:partha@nath.com">
+          <Link
+            href="mailto:partha@nath.com"
+            className="flex items-center gap-2"
+          >
             <Headphones />
             <span className="hidden lg:block">Need help?</span>
           </Link>
