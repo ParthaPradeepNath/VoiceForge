@@ -4,6 +4,7 @@ import { Geist_Mono, Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { Toaster } from "@/components/ui/sonner";
+import { TRPCReactProvider } from "@/trpc/client";
 
 import "./globals.css";
 
@@ -30,15 +31,17 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html
-        lang="en"
-        className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
-      >
-        <body className="flex min-h-full flex-col" suppressHydrationWarning>
-          {children}
-          <Toaster />
-        </body>
-      </html>
+      <TRPCReactProvider>
+        <html
+          lang="en"
+          className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
+        >
+          <body className="flex min-h-full flex-col" suppressHydrationWarning>
+            {children}
+            <Toaster />
+          </body>
+        </html>
+      </TRPCReactProvider>
     </ClerkProvider>
   );
 }
