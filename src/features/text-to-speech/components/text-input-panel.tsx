@@ -30,6 +30,7 @@ export function TextInputPanel() {
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               placeholder="Start typing or paste your text here..."
+              aria-label="Text input area for typing or pasting content"
               className="absolute inset-0 resize-none border-0 bg-transparent p-4 pb-6 text-base leading-relaxed tracking-tight wrap-break-word shadow-none focus-visible:ring-0 lg:p-6 lg:pb-8"
               maxLength={TEXT_MAX_LENGTH}
               disabled={isSubmitting}
