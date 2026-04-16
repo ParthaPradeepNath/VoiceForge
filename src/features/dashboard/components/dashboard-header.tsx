@@ -7,6 +7,7 @@ import { Headphones } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import LikeIcon from "@/components/ui/like-icon";
+import { cn } from "@/lib/utils";
 
 export function DashboardHeader() {
   const { isLoaded, user } = useUser();
@@ -27,7 +28,7 @@ export function DashboardHeader() {
             <Link
               href="mailto:partha@nath.com"
               {...props}
-              className="flex items-center gap-2"
+              className={cn(props.className, "flex items-center gap-2")}
             />
           )}
         >
@@ -42,7 +43,7 @@ export function DashboardHeader() {
             <Link
               href="mailto:partha@nath.com"
               {...props}
-              className="flex items-center gap-2"
+              className={cn(props.className, "flex items-center gap-2")}
             />
           )}
         >
