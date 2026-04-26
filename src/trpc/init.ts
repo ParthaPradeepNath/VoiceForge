@@ -27,67 +27,21 @@ export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
 
-// Authenticated procedure - calls auth() only when needed
-// export const authProcedure = t.procedure.use(async ({ next }) => {
-//   const { userId } = await auth();
-
-//   if (!userId) {
-//     throw new TRPCError({ code: "UNAUTHORIZED" });
-//   }
-//   return next({
-//     ctx: {userId}
-//   });
-// })
+// // Authenticated procedure - calls auth() only when needed
 export const authProcedure = t.procedure.use(async ({ next }) => {
-  let userId: string | null = null;
-
-  try {
-    const authData = await auth();
-    userId = authData.userId;
-  } catch {
-    userId = null; // 👈 prevents crash during SSR
-  }
+  const { userId } = await auth();
 
   if (!userId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
-
   return next({
     ctx: { userId },
   });
 });
 
-// Organization procedure - requires userId and orgId
-// export const orgProcedure = t.procedure.use(async ({ next }) => {
-//   const { userId, orgId } = await auth();
-
-//   if (!userId) {
-//     throw new TRPCError({ code: "UNAUTHORIZED" });
-//   }
-
-//   if (!orgId) {
-//     throw new TRPCError({
-//       code: "FORBIDDEN",
-//       message: "Organization required",
-//     })
-//   }
-//   return next({
-//     ctx: {userId, orgId}
-//   });
-// })
-
+// // Organization procedure - requires userId and orgId
 export const orgProcedure = t.procedure.use(async ({ next }) => {
-  let userId: string | null = null;
-  let orgId: string | null = null;
-
-  try {
-    const authData = await auth();
-    userId = authData.userId ?? null;
-    orgId = authData.orgId ?? null;
-  } catch {
-    userId = null;
-    orgId = null;
-  }
+  const { userId, orgId } = await auth();
 
   if (!userId) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
@@ -99,7 +53,6 @@ export const orgProcedure = t.procedure.use(async ({ next }) => {
       message: "Organization required",
     });
   }
-
   return next({
     ctx: { userId, orgId },
   });

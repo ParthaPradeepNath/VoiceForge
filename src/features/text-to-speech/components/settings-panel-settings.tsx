@@ -51,7 +51,6 @@ export function SettingsPanelSettings() {
                     disabled={isSubmitting}
                     className="**:data-[slot=slider-thumb]:bg-foreground **:data-[slot=slider-thumb]:size-3 **:data-[slot=slider-track]:h-1"
                   />
-                  console.log(field.state.value);
                 </Field>
               )}
             </form.Field>

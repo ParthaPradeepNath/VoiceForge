@@ -142,34 +142,40 @@ export const voicesRouter = createTRPCRouter({
         orgId = null;
       }
 
-      const [custom, system] = await Promise.all([
-        // ✅ Only fetch custom voices if org exists
-        orgId
-          ? prisma.voice.findMany({
-              where: {
-                variant: "CUSTOM",
-                orgId,
-                ...searchFilter,
-              },
-            })
-          : [],
+      // ✅ Common shape (VERY IMPORTANT)
+      const baseSelect = {
+        id: true,
+        name: true,
+        description: true,
+        category: true,
+        language: true,
+        variant: true,
+      };
 
-        // ✅ System voices always available (public)
-        prisma.voice.findMany({
-          where: {
-            variant: "SYSTEM",
-            ...searchFilter,
-          },
-          orderBy: { name: "asc" },
-          select: {
-            id: true,
-            name: true,
-            description: true,
-            category: true,
-            language: true,
-            variant: true,
-          },
-        }),
+      // ✅ Fetch both in parallel
+      const customPromise = orgId
+        ? prisma.voice.findMany({
+            where: {
+              variant: "CUSTOM",
+              orgId,
+              ...searchFilter,
+            },
+            select: baseSelect, // ✅ FIX: normalize shape
+          })
+        : Promise.resolve([]); // ✅ avoids never[]
+
+      const systemPromise = prisma.voice.findMany({
+        where: {
+          variant: "SYSTEM",
+          ...searchFilter,
+        },
+        orderBy: { name: "asc" },
+        select: baseSelect,
+      });
+
+      const [custom, system] = await Promise.all([
+        customPromise,
+        systemPromise,
       ]);
 
       return { custom, system };

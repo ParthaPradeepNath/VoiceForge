@@ -8,6 +8,8 @@ export const env = createEnv({
     FILEBASE_ACCESS_KEY: z.string().min(1),
     FILEBASE_SECRET_KEY: z.string().min(1),
     FILEBASE_BUCKET_NAME: z.string().min(1),
+    CHATTERBOX_API_URL: z.url(),
+    CHATTERBOX_API_KEY: z.string().min(1),
     // R2_ACCOUNT_ID: z.string().min(1),
     // R2_ACCESS_KEY_ID: z.string().min(1),
     // R2_SECRET_ACCESS_KEY: z.string().min(1),
