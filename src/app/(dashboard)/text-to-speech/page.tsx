@@ -33,7 +33,6 @@ function normalizeParam(param?: string | string[]): string | undefined {
 export default async function TextToSpeechPage({
   searchParams,
 }: {
-  // ✅ FIXED TYPE
   searchParams: Promise<{
     text?: string | string[];
     voiceId?: string | string[];
