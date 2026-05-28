@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Spinner } from "@/components/ui/spinner";
 import { VoiceAvatar } from "@/components/voice-avatar/voice-avatar";
+import { useAudioPlayback } from "@/hooks/use-audio-playback";
 import type { AppRouter } from "@/trpc/routers/_app";
 
 import { VOICE_CATEGORY_LABELS } from "../data/voice-categories";
@@ -39,12 +40,13 @@ function parseLanguage(locale: string) {
 }
 
 export default function VoiceCard({ voice }: VoiceCardProps) {
-  const isLoading = false;
-  const isPlaying = false;
+  //   const isLoading = false;
+  //   const isPlaying = false;
 
   const { flag, region } = parseLanguage(voice.language);
 
   const audioSrc = `/api/voices/${encodeURIComponent(voice.id)}`;
+  const { isPlaying, isLoading, togglePlay } = useAudioPlayback(audioSrc);
 
   return (
     <div className="flex items-center gap-1 overflow-hidden rounded-xl border pr-3 lg:pr-6">
@@ -84,7 +86,7 @@ export default function VoiceCard({ voice }: VoiceCardProps) {
           variant="outline"
           size="icon-sm"
           className="rounded-full"
-          onClick={() => {}} // TODO: Change to "togglePlay()"
+          onClick={togglePlay}
           disabled={isLoading}
         >
           {isLoading ? (

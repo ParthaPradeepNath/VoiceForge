@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 
 import { ClerkProvider } from "@clerk/nextjs";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 import { Toaster } from "@/components/ui/sonner";
 import { TRPCReactProvider } from "@/trpc/client";
@@ -37,7 +38,7 @@ export default function RootLayout({
           className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
         >
           <body className="flex min-h-full flex-col" suppressHydrationWarning>
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
             <Toaster />
           </body>
         </html>
